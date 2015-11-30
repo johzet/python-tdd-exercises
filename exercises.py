@@ -349,7 +349,22 @@ def read_column(file_name, column_number):
     Reads column column_number from file file_name
     and returns the values as floats in a list.
     """
-    return None
+    file = open(file_name, 'r+')
+    col_n=[]
+    # Skip first row
+    file.readline()
+    # Read each row
+    for line in file:
+        row = line.rstrip('\n').split()
+        col_n.append(float(row[column_number-1]))
+        # row = line.rstrip('\n')
+        # row_spl = row.split()
+        # col_n.append(float(row_spl[1]))
+        # print(col_n)
+#        n_word = row_spl[column_number-1]
+#        col_n.append(float(n_word))
+       
+    return col_n
 
 
 def test_read_column():
