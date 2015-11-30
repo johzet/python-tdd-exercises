@@ -1,7 +1,7 @@
 
 def reverse_list(l):
     """
-    Reverses order of characters in a list l.
+    Reverses order of elements in list l.
     """
     return l[::-1]
 
