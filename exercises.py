@@ -96,7 +96,7 @@ def histogram(l):
             if i < length - 1:
                 final_str += '\n'
                 
-        print("{0}".format(final_str)) # does not work
+        #print("{0}".format(final_str)) # does not work
         return final_str
 
 
@@ -403,6 +403,76 @@ def character_statistics(file_name):
     Use the isalpha() method to figure out
     whether the character is in the alphabet.
     """
+    # Use a dictionary with word being the keys
+    # and the repetitions as values
+    dic = {}
+    # Open the file
+    file = open(file_name, 'r')
+    # Iterate over the rows
+    for line in file:
+        # Read the row to a string (with EOL removed)
+        row = line.rstrip('\n')
+        # Calculate the number of characters in the row
+        row_len = len(row)
+        # Intitialize the word string
+        word = ''
+        # Iterate over the characters in the row
+        for i in range(0, row_len):
+            # Put the character in a new variable
+            # as a lower case character
+            c = row[i].lower()
+            # If the character is in the alphabet
+            # add it to the word string
+            if isalpha(c):
+                word += c
+            # If the character is not in the alpabet
+            # we are either at the beginning of a row
+            # in which case the word string is empty
+            # or we have just read a word
+            # in which case we need to count the word
+            else:
+                # If we just read a word
+                if not word == '':
+                    # See if the word is already 
+                    # in the dictionary
+                    if word in dic:
+                        dic[word] += 1
+                    # Other case we add it to
+                    # the dictionary
+                    else:
+                        dic[word] = 1
+                    # Reset the word string
+                    word = ''
+
+    # Create a list of the word frequencies
+    freq_list = list(dic.values())
+
+    # Get the frequency for the most abundant word
+    freq_max = max(freq_list)
+    # What is the index of the most abundant word
+    # If there are more than one, pick the first one
+    max_idx = freq_list.index(freq_max)
+
+    # Get the frequency for the least abundant word
+    freq_min = min(freq_list)
+    # What is the index of the least abundant word
+    # If there are more than one, pick the first one
+    min_idx = freq_list.index(freq_min)
+
+    return ()
+
+    # Get the min frequency for a word
+    freq_min = word_lengths.index(max(word_lengths))
+    # What is the index of the most abundant word
+    # If there are more than one, pick the first one
+    max_idx = list(dic.values()).index(freq_max)
+    
+    # Sort the list by word frequency
+    sorted_words = sorted(dic.iteritems())
+    # the numbers to find the most
+    # and least abundant words in the text
+    
+    
     return None
 
 
