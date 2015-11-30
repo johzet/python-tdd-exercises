@@ -1,10 +1,7 @@
 
 def reverse_list(l):
     """
-    newl=[]
-    for i in range(1,len(l)+1):
-        newl.append(l[-i])
-    return newl
+    Reverses order of characters in a list l.
     """
     return l[::-1]
 
@@ -260,13 +257,6 @@ def remove_substring(substring, string):
     Returns string with all occurrences of substring removed.
     """
     return string.replace(substring, '')
-    # str_len = len(string)
-    # sub_len = len(substring)
-    # for i in range(0, str_len - sub_len)
-    # idx = string.find(substring, string(
-    # bad_set =  
-    # return None
-
 
 def test_remove_substring():
     assert remove_substring('GAA', 'CCGGAAGAGCTTACTTAG') == 'CCGGAGCTTACTTAG'
@@ -357,12 +347,6 @@ def read_column(file_name, column_number):
     for line in file:
         row = line.rstrip('\n').split()
         col_n.append(float(row[column_number-1]))
-        # row = line.rstrip('\n')
-        # row_spl = row.split()
-        # col_n.append(float(row_spl[1]))
-        # print(col_n)
-#        n_word = row_spl[column_number-1]
-#        col_n.append(float(n_word))
        
     return col_n
 
@@ -414,66 +398,40 @@ def character_statistics(file_name):
         row = line.rstrip('\n')
         # Calculate the number of characters in the row
         row_len = len(row)
-        # Intitialize the word string
-        word = ''
         # Iterate over the characters in the row
         for i in range(0, row_len):
             # Put the character in a new variable
             # as a lower case character
             c = row[i].lower()
             # If the character is in the alphabet
-            # add it to the word string
-            if isalpha(c):
-                word += c
-            # If the character is not in the alpabet
-            # we are either at the beginning of a row
-            # in which case the word string is empty
-            # or we have just read a word
-            # in which case we need to count the word
-            else:
-                # If we just read a word
-                if not word == '':
-                    # See if the word is already 
-                    # in the dictionary
-                    if word in dic:
-                        dic[word] += 1
-                    # Other case we add it to
-                    # the dictionary
-                    else:
-                        dic[word] = 1
-                    # Reset the word string
-                    word = ''
+            if c.isalpha():
+                # See if the word is already in the 
+                # dictionary. Then increment the counter
+                # for that character
+                if c in dic:
+                    dic[c] += 1
+                # Otherwise we add it to the dictionary
+                else:
+                    dic[c] = 1
 
-    # Create a list of the word frequencies
+    # Create a list of the frequencies
     freq_list = list(dic.values())
+    # Create a list of the values
+    char_list = list(dic.keys())
 
-    # Get the frequency for the most abundant word
+    # Get the frequency for the most abundant character
     freq_max = max(freq_list)
-    # What is the index of the most abundant word
+    # What is the index of the most abundant character
     # If there are more than one, pick the first one
     max_idx = freq_list.index(freq_max)
 
-    # Get the frequency for the least abundant word
+    # Get the frequency for the least abundant character
     freq_min = min(freq_list)
-    # What is the index of the least abundant word
+    # What is the index of the least abundant character
     # If there are more than one, pick the first one
     min_idx = freq_list.index(freq_min)
 
-    return ()
-
-    # Get the min frequency for a word
-    freq_min = word_lengths.index(max(word_lengths))
-    # What is the index of the most abundant word
-    # If there are more than one, pick the first one
-    max_idx = list(dic.values()).index(freq_max)
-    
-    # Sort the list by word frequency
-    sorted_words = sorted(dic.iteritems())
-    # the numbers to find the most
-    # and least abundant words in the text
-    
-    
-    return None
+    return (char_list[max_idx], char_list[min_idx]) 
 
 
 def test_character_statistics():
@@ -525,7 +483,7 @@ Be all my sins remember'd."""
 
     # and now we pass the file name to the function which will get the stats
     (most_abundant, least_abundant) = character_statistics(file_name)
-    assert (most_abundant, least_abundant) == ('e', 'q')
+    assert (most_abundant, least_abundant) == ('e', 'z')
 
     # we remove the temporary file
     os.unlink(file_name)
@@ -547,8 +505,10 @@ def pythagorean_triples(n):
                     l.append((a, b, c))
     return l
 
-
 # ------------------------------------------------------------------------------
 
 def test_pythagorean_triples():
-    pass  # so far we do not test anything, check also test coverage
+    # Test using the simplest pythagorean triple
+    assert (3, 4, 5) in pythagorean_triples(5)
+    # Also test using a multiple of it
+    assert (4*3, 4*4, 4*5) in pythagorean_triples(20)
