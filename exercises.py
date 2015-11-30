@@ -84,19 +84,14 @@ def histogram(l):
     """
     length = len(l)
     final_str = ''
-    if length == 0:
-        return final_str
-    else:
+    if not length == 0:
         for i in range(0,length):
             for j in range(0, l[i]):
                 final_str += '#'
             if i < length - 1:
                 final_str += '\n'
                 
-        #print("{0}".format(final_str)) # does not work
         return final_str
-
-
 
 def test_histogram():
     assert histogram([2, 5, 1]) == '##\n#####\n#'
